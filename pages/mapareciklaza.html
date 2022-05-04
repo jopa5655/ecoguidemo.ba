@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lokacije kanti za reciklažu</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<style type="text/css">
+	button:hover{
+    background:rgb(57,194,108);
+background:linear-gradient(120deg, rgba(57,194,108,0.5) 28%, rgba(13,131,226,0.5) 95%);
+border-radius:11px;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+	
+<div id="map">
+<button onclick="Funkcija()" style="  
+  z-index: 500;
+  height: 40px;
+position: relative;
+left: 50px;
+top: 22px;
+border-radius:11px;
+  " id="dugme">>>Pronađi najbližu kantu<<</button>
+</div>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script> 
+
+
+let mapOptions = {
+    center:[43.3530,17.8023],
+    zoom:14
+}
+
+
+let map = new L.map('map' , mapOptions);
+
+let layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+map.addLayer(layer);
+
+const locations = [
+	{
+
+		"id":1,
+		"lat":43.34676,
+		
+		"long":17.79703,
+		
+		"title":"Adresa: Stjepana Radića 72 <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
+		"src":"../assets/kanta.png"
+	},
+
+
+	{
+		"id":2,
+		"lat":43.34589,
+		
+		"long":17.79972,
+		
+		"title":"Adresa: Kralja Zvonimira 24 <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
+		"src":"../assets/kanta.png",
+		"url":"email.html"
+	},
+
+	{
+		"id":3,
+		"lat":43.36122,
+		
+		"long":17.80364,
+		
+		"title":"Adresa: II Bojne rudničke bb. <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
+		"src":"../assets/kanta.png"
+	},
+
+	{
+		"id":4,
+		"lat":43.36427,
+		
+		"long":17.82202,
+		
+		"title":"Adresa: Cesta M-17, M-17 5<br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
+		"src":"../assets/kanta.png"
+	},
+
+	{
+		"id":5,
+		"lat":43.34551,
+		
+		"long":17.80085,
+		
+		"title":"Adresa: Zagrebačka bb.<br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
+		"src":"../assets/kanta.png"
+	}
+
+]
+
+let popupOption = {
+	"closeButton":false
+}
+
+
+
+if ($(window).width() < 960) {
+   locations.forEach(element =>{
+	new L.Marker([element.lat,element.long]).addTo(map)
+	.on("click",event =>{
+		event.target.bindPopup('<div class="card"><img src="'+element.src+'" width="80" height="80"><h3>'+element.title+'</h3></div>',popupOption).openPopup();
+	})
+	.on("click", event => {
+		event.target.closePopup();
+	})
+
+	
+});
+}
+else {
+   locations.forEach(element =>{
+	new L.Marker([element.lat,element.long]).addTo(map)
+	.on("mouseover",event =>{
+		event.target.bindPopup('<div class="card"><img src="'+element.src+'" width="80" height="80"><h3>'+element.title+'</h3></div>',popupOption).openPopup();
+	})
+	.on("click", event => {
+		event.target.closePopup();
+	})
+	
+	  console.log(element.lat);
+	  console.log(element.long);
+
+});
+}
+
+function Funkcija() {
+	if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    console.log("Geolocation is not supported by this browser."
+    	);
+  }
+
+ 
+
+
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude +
+  ' Longitude: '+ position.coords.longitude);
+
+
+
+var latt = [43.34676, 43.34589, 43.36122, 43.36427, 43.34551]
+var longg = [17.79703, 17.79972, 17.80364, 17.82202, 17.80085],
+  goal = position.coords.latitude;
+
+const closest = latt.reduce(function(prev, curr) {
+  return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+});
+
+goal2 = position.coords.longitude;
+
+const closest2 = longg.reduce(function(prev, curr) {
+  return (Math.abs(curr - goal2) < Math.abs(prev - goal2) ? curr : prev);
+});
+console.log(closest);
+console.log(closest2);
+
+
+	 locations.forEach(element =>{
+	 	console.log(element.lat);
+	var myIcon = L.icon({
+iconUrl: '../assets/marker.gif',
+iconSize: [14, 14],
+
+
+});
+L.marker([closest, closest2], {icon: myIcon}).addTo(map);
+map.flyTo([closest, closest2], 18);
+
+
+})
+
+
+
+
+
+}
+}
+ function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+     alert('Moramo znati vašu lokaciju da bi pronašli najbliže kante za reciklažu.');
+      break;
+    case error.POSITION_UNAVAILABLE:
+    alert("Lokacija je nedostupna.");
+      break;
+    case error.TIMEOUT:
+    alert("Lokaciji je potrebno previše vremena za odgovor");
+      break;
+    case error.UNKNOWN_ERROR:
+    alert("Desila se misteriozna greška.");
+      break;
+  }
+}
+
+</script>
+
+</body>
+</html>

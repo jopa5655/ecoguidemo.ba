@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kontakt</title>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+$('#contact-form').submit(function (e) {
+const form = document.querySelector('form[id="contact-form"]');
+const username = form.elements['user_name'].value;
+const userMail = form.elements['user_email'].value;
+const subject = form.elements['subject'].value;
+const message = form.elements['message'].value;
+
+e.preventDefault();
+var data = {
+service_id: 'gmail',
+template_id: 'template_5w4ul4d',
+user_id: 'DvcVMcE4L9R0j6acu',
+template_params: {
+from_name: username,
+to_name: 'EcoGuideMo',
+email: userMail,
+subject: subject,
+message:message
+
+}
+};
+$.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+type: 'POST',
+data: JSON.stringify(data),
+contentType: 'application/json'
+}).done(function() {
+alert('Vaša poruka je poslana! Očekujte odgovor na E-Mail uskoro. *Ukoliko ste unijeli pogrešnu E-Mail adresu, nećemo vam moći odgovoriti.*');
+}).fail(function(error) {
+alert('Oops… ' + JSON.stringify(error));
+})
+})
+})
+</script>
+<style type="text/css">
+    body{
+        margin: 0;
+        padding: 0;
+      
+    }
+
+
+.bg{
+              background: rgb(13,131,226);
+background: linear-gradient(0deg, rgba(13,131,226,1) 28%, rgba(57,194,108,1) 64%);
+background-size: cover;
+width: 100%;
+height: 100vh;
+}
+
+.form{
+  height: 200px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+
+}
+.form input, textarea{
+    padding: 10px;
+    width: 50%;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 5px;
+    outline: 1px solid #000;
+     margin-bottom: 10px;
+}
+
+.button{
+width: 10%;
+cursor: pointer;
+}
+
+
+
+.button:hover{
+    background:rgb(57,194,108);
+background:linear-gradient(120deg, rgba(57,194,108,0.5) 28%, rgba(13,131,226,0.5) 95%);
+border-radius:11px;
+}
+#message{
+    width: 50%;
+    height: 200px;
+}
+
+@media only screen and (min-width: 960px) {
+.form input, textarea{
+width: 30%;
+height: 30px;
+font-size: 18px;
+}
+#message{
+    width: 30%;
+    height: 30px;
+}
+}
+
+</style>
+</head>
+<body>
+    <div class="bg">
+    <div class="forma">
+ <form id="contact-form" class="form">
+<input type="hidden" name="contact_number">
+<input type="text" required name="user_name" id="user_name" placeholder="Vaše ime*">
+<br>
+<input type="email" required name="user_email" id="user_email" placeholder="E-Mail*">
+<br>
+<input type="subject" name="subject" id="subject" placeholder="Subject">
+<br>
+<textarea id="message" required name="message" placeholder="Poruka*" style="height:200px; width: 50%;"></textarea>
+<br>
+<input type="submit" value="Send" class="button" style="height: 50px">
+</form>
+</div>
+</div>
+</body>
+</html>

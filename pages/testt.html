@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>err</title>
+</head>
+<body>	
+<script type="text/javascript">
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser."
+    	);
+  }
+
+
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude +
+  ' Longitude: '+ position.coords.longitude);
+
+
+
+var lat = [43.3454017, 42.3454017, 40.017]
+var long = [17.8015918, 43.345401, 53.34540],
+  goal = position.coords.latitude;
+
+var closest = lat.reduce(function(prev, curr) {
+  return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+});
+
+goal2 = position.coords.longitude;
+
+var closest2 = long.reduce(function(prev, curr) {
+  return (Math.abs(curr - goal2) < Math.abs(prev - goal2) ? curr : prev);
+});
+console.log(closest);
+console.log(closest2);
+}
+
+
+
+</script>
+</body>
+</html>
