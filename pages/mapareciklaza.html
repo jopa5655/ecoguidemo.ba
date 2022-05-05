@@ -47,9 +47,9 @@ const locations = [
 	{
 
 		"id":1,
-		"lat":43.34676,
+		"lat":43.3649344,
 		
-		"long":17.79703,
+		"long":17.8230754,
 		
 		"title":"Adresa: Stjepana Radića 72 <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
 		"src":"../assets/kanta.png"
@@ -58,42 +58,22 @@ const locations = [
 
 	{
 		"id":2,
-		"lat":43.34589,
+		"lat":43.3465884,
 		
-		"long":17.79972,
+		"long":17.7980732,
 		
-		"title":"Adresa: Kralja Zvonimira 24 <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
+		"title":"Adresa: Kralja Tomislava bb. <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
 		"src":"../assets/kanta.png",
 		"url":"email.html"
 	},
 
 	{
 		"id":3,
-		"lat":43.36122,
+		"lat":43.3491224,
 		
-		"long":17.80364,
+		"long":17.8059639,
 		
 		"title":"Adresa: II Bojne rudničke bb. <br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
-		"src":"../assets/kanta.png"
-	},
-
-	{
-		"id":4,
-		"lat":43.36427,
-		
-		"long":17.82202,
-		
-		"title":"Adresa: Cesta M-17, M-17 5<br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
-		"src":"../assets/kanta.png"
-	},
-
-	{
-		"id":5,
-		"lat":43.34551,
-		
-		"long":17.80085,
-		
-		"title":"Adresa: Zagrebačka bb.<br> <p style='color:blue;'>Papir</p>  <p style='color:yellow;'>Plastika</p> <p style='color:gray'>Staklo</p> <p style='color:brown'>Biorazgradivo</p> <p style='color:green'>Miješani otpad</p> <a href='email.html'<h3>Klikni i kontaktiraj nas na E-Mail</h3></a>",
 		"src":"../assets/kanta.png"
 	}
 
@@ -128,8 +108,7 @@ else {
 		event.target.closePopup();
 	})
 	
-	  console.log(element.lat);
-	  console.log(element.long);
+	  
 
 });
 }
@@ -140,23 +119,26 @@ function Funkcija() {
   } else {
     console.log("Geolocation is not supported by this browser."
     	);
+
   }
 
- 
+    
 
 
 function showPosition(position) {
   console.log("Latitude: " + position.coords.latitude +
-  ' Longitude: '+ position.coords.longitude);
+  " Longitude: "+ position.coords.longitude);
+  
 
 
-
-var latt = [43.34676, 43.34589, 43.36122, 43.36427, 43.34551]
-var longg = [17.79703, 17.79972, 17.80364, 17.82202, 17.80085],
+var latt = [43.3465884]
+var longg = [17.7980732],
   goal = position.coords.latitude;
 
+
 const closest = latt.reduce(function(prev, curr) {
-  return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+  return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev); 
+
 });
 
 goal2 = position.coords.longitude;
@@ -164,21 +146,18 @@ goal2 = position.coords.longitude;
 const closest2 = longg.reduce(function(prev, curr) {
   return (Math.abs(curr - goal2) < Math.abs(prev - goal2) ? curr : prev);
 });
-console.log(closest);
-console.log(closest2);
 
 
 	 locations.forEach(element =>{
-	 	console.log(element.lat);
+	 	
 	var myIcon = L.icon({
 iconUrl: '../assets/marker.gif',
-iconSize: [14, 14],
+iconSize: [16, 16],
 
 
 });
 L.marker([closest, closest2], {icon: myIcon}).addTo(map);
 map.flyTo([closest, closest2], 18);
-
 
 })
 
