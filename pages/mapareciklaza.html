@@ -161,12 +161,31 @@ map.flyTo([closest, closest2], 18);
 
 })
 
+ locations.forEach(element =>{
+	 	
+	var myIcon = L.icon({
+iconUrl: '../assets/marker.gif',
+iconSize: [16, 16]
+
+
+});
+
+	 locations.forEach(element =>{
+var myIcon2 = L.icon({
+iconUrl: '../assets/markerlocation.gif',
+iconSize: [16, 16]
+
+});
+L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon2}).addTo(map);
+
+})
 
 
 
-
+})
 }
 }
+
  function showError(error) {
   switch(error.code) {
     case error.PERMISSION_DENIED:
